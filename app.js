@@ -334,8 +334,7 @@ bookList.previousElementSibling.querySelector('p').innerHTML += '<br/>Too cool';
  * lesson-18
  * DOMContentLoaded Event
  *
- */
-document.addEventListener('DOMContentLoaded', function () {
+ document.addEventListener('DOMContentLoaded', function () {
 
 
     const tabs = document.querySelector('.tabs');
@@ -354,4 +353,95 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
+})
+ */
+
+var link = document.querySelector('a');
+
+link.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (e.target.textContent == 'click me') {
+        e.target.textContent = '戳我';
+        return;
+    }
+    e.target.textContent = 'click me';
+
+})
+
+var list = document.querySelector('#book-list ul');
+
+list.addEventListener('click', function (e) {
+    if (e.target.className == 'delete') {
+        const li = e.target.parentElement;
+
+        list.removeChild(li);
+    }
+})
+
+var addForm = document.forms['add-book'];
+
+addForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var value = addForm.querySelector('input[type="text"]').value;
+
+    const li = document.createElement('li');
+    const bookName = document.createElement('span');
+    const deleteBtn = document.createElement('span');
+
+    deleteBtn.textContent = 'delete';
+    bookName.textContent = value;
+
+    bookName.classList.add('name');
+    deleteBtn.classList.add('delete');
+
+    li.appendChild(bookName);
+    li.appendChild(deleteBtn);
+    list.appendChild(li);
+
+    addForm.querySelector('input[type="text"]').value = '';
+})
+
+
+var hideBox = document.querySelector('#hide');
+hideBox.addEventListener('change', function (e) {
+    if (e.target.checked) {
+        list.style.display = 'none';
+    } else {
+        list.style.display = 'initial'
+    }
+})
+
+const search_input = document.forms['search-books'].querySelector('input');
+
+search_input.addEventListener('keyup', function (e) {
+    const search_value = search_input.value.toLowerCase();
+
+    var books = list.querySelectorAll('li');
+
+    Array.from(books).forEach(function (book) {
+        var title = book.firstElementChild.textContent;
+
+        if (title.toLowerCase().indexOf(search_value) != -1) {
+            book.style.display = 'block'
+        } else {
+            book.style.display = 'none'
+        }
+    })
+})
+
+const tabs = document.querySelector('.tabs');
+const panels = document.querySelectorAll('.panel');
+
+tabs.addEventListener('click', function (e) {
+    if (e.target.nodeName == 'LI') {
+        const targetPanel = document.querySelector(e.target.dataset.target);
+        panels.forEach(function (panel) {
+            if (panel == targetPanel) {
+                panel.classList.add('active');
+            } else {
+                panel.classList.remove('active')
+            }
+        })
+    }
 })
