@@ -186,3 +186,172 @@ bookList.previousElementSibling.querySelector('p').innerHTML += '<br/>Too cool';
     console.log(value);
 })
  */
+
+/**
+ * lesson-12
+ * Creating Elements
+ *
+ const list = document.querySelector('#book-list ul');
+
+ const addForm = document.forms['add-book'];
+
+ addForm.addEventListener('submit', function (e) {
+     e.preventDefault();
+
+     const value = addForm.querySelector(['input[type="text"]']).value;
+
+     console.log(value);
+
+     const li = document.createElement('li');
+     const bookName = document.createElement('span');
+     const deleteBtn = document.createElement('span');
+
+     deleteBtn.textContent = 'delete';
+     bookName.textContent = value
+
+     li.appendChild(bookName);
+     li.appendChild(deleteBtn);
+     list.appendChild(li);
+ })
+ */
+
+/**
+ * lesson-13
+ * Styles & Classes
+ *
+ *
+ var li = document.querySelector('li:last-child');
+
+ li.style.color = 'red'
+ li.style.marginTop = "60px"
+ li.className = "test"
+ li.className += " test"
+
+
+ const list = document.querySelector('#book-list ul');
+
+ const addForm = document.forms['add-book'];
+
+ addForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const value = addForm.querySelector(['input[type="text"]']).value;
+
+    console.log(value);
+
+    const li = document.createElement('li');
+    const bookName = document.createElement('span');
+    const deleteBtn = document.createElement('span');
+
+    deleteBtn.textContent = 'delete';
+    bookName.textContent = value
+
+    bookName.classList.remove('name');
+    bookName.classList.add('name');
+    deleteBtn.classList.add('delete');
+
+    li.appendChild(bookName);
+    li.appendChild(deleteBtn);
+    list.appendChild(li);
+})
+ */
+
+/**
+ * lesson-14
+ * Atributes
+ *
+ var book = document.querySelector('li:first-child .name');
+
+ console.log(book.getAttribute('class'));
+ book.setAttribute('class', 'name-2');
+
+ console.log(book.hasAttribute('class'));
+
+ book.removeAttribute('class')
+
+ book.setAttribute('class', 'name')
+ */
+
+/**
+ * lesson-15
+ * Checkboxes & Change Events
+ const list = document.querySelector('#book-list ul');
+
+ const hideBox = document.querySelector('#hide');
+ hideBox.addEventListener('change', function (e) {
+    if (hideBox.checked) {
+        list.style.display = 'none';
+    } else {
+        list.style.display = 'initial';
+    }
+})
+ */
+
+/**
+ * lesson-16
+ * Custom Search Filter
+ *
+ const list = document.querySelector('#book-list ul');
+
+ const searchBar = document.forms['search-books'].querySelector('input');
+
+ searchBar.addEventListener('keyup', function (e) {
+    const trem = e.target.value.toLowerCase();
+    const books = list.getElementsByTagName('li');
+    Array.from(books).forEach(function (book) {
+        const title = book.firstElementChild.textContent;
+        if (title.toLowerCase().indexOf(trem) != -1) {
+            book.style.display = 'block';
+        } else {
+            book.style.display = 'none';
+        }
+    })
+})
+ */
+
+/**
+ * lesson-17
+ * Tabbed Content
+ *
+ const tabs = document.querySelector('.tabs');
+ const panels = document.querySelectorAll('.panel');
+ tabs.addEventListener('click', function (e) {
+
+    if (e.target.nodeName == "LI") {
+        const targetPanel = document.querySelector(e.target.dataset.target);
+        panels.forEach(function (panel) {
+            if (panel == targetPanel) {
+                panel.classList.add('active')
+            } else {
+                panel.classList.remove('active')
+            }
+        })
+    }
+})
+ */
+
+/**
+ * lesson-18
+ * DOMContentLoaded Event
+ *
+ */
+document.addEventListener('DOMContentLoaded', function () {
+
+
+    const tabs = document.querySelector('.tabs');
+    const panels = document.querySelectorAll('.panel');
+    tabs.addEventListener('click', function (e) {
+
+        if (e.target.nodeName == "LI") {
+            const targetPanel = document.querySelector(e.target.dataset.target);
+            panels.forEach(function (panel) {
+                if (panel == targetPanel) {
+                    panel.classList.add('active')
+                } else {
+                    panel.classList.remove('active')
+                }
+            })
+        }
+    })
+
+})
